@@ -12,6 +12,8 @@ Create Time:        15:37
 Note:
 
     excel表格规范如下：
+    表格的location部分比如：/ec/mgr/membership/queryAutoTagList ， 会同时增加10.16.168.208:8080和10.16.165.44:8080两台后端服务器转发
+    如果有多个location对应不同的ip,用新增表格的方式。
     1，IP及port部分，无需合并单元格，每个IP独占一个单元格，脚本会依次读取
     2，表名固定为Sheet1
     3，Excel文件名字参照这个格式： 20180612Location.xlsx
