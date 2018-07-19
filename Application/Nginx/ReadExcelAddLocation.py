@@ -46,6 +46,7 @@ baseport = '8080'
 print("Start the engine.\n\nStart time at %s,and all upstreams port was set to 8080\n\n" % nowTime)
 CWD_DIR = '/tmp'
 base_DIR = '/usr/local/nginx/conf'
+back_DIR = '/data/backup'
 
 
 # Backup and compress DIR
@@ -60,17 +61,24 @@ def zip_file(sourceDIR):
         aszip.write(sourceDIR+'/'+filenames,compress_type=None)
         aszip.close()
     print("The %s DIR was backup Done!\n" % sourceDIR)
+    if os.path.isdir(back_DIR):
+        shutil.move(sourceDIR + nowTime + '.zip', back_DIR)
+    else:
+        os.mkdir('/data/backup', 0755)
+        shutil.move(sourceDIR + nowTime + '.zip', back_DIR)
+
+
 
 
 def halfnewfile():
-    shutil.copyfile('%s/vhost.d/domain.com.conf' % base_DIR,'%s/domain.com.conf' % CWD_DIR)
+    shutil.copyfile('%s/vhost.d/saas-ec.internal.weimob.com.conf' % base_DIR,'%s/saas-ec.internal.weimob.com.conf' % CWD_DIR)
     os.chdir(CWD_DIR)
     #Count the line number
-    with open('domain.com.conf','r') as f:
+    with open('saas-ec.internal.weimob.com.conf','r') as f:
         tmpnum = len(f.readlines())
         neednum = int(tmpnum) - 1
 
-    with open('domain.com.conf','r') as f:
+    with open('saas-ec.internal.weimob.com.conf','r') as f:
         try:
             os.remove('tmp.conf')
         except OSError,e:
@@ -128,7 +136,7 @@ def completefile(sourceexcel):
         f.write('}')
 
     #Copy the complete file to source file
-    shutil.copyfile('tmp.conf','%s/vhost.d/domain.com.conf' % base_DIR)
+    shutil.copyfile('tmp.conf','%s/vhost.d/saas-ec.internal.weimob.com.conf' % base_DIR)
 
     #Add the upstreams files
     os.chdir('%s/upstreams' % base_DIR)
