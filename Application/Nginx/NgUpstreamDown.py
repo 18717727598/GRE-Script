@@ -88,6 +88,8 @@ class NgDownServer(object):
                 </table>                    
                 '''.format(ngurl=u, body=body, time=_now_time)
                 _all_html += _module_html
+            else:
+                exit(0)
         return _all_html
 
 

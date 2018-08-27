@@ -71,14 +71,14 @@ def zip_file(sourceDIR):
 
 
 def halfnewfile():
-    shutil.copyfile('%s/vhost.d/saas-ec.internal.weimob.com.conf' % base_DIR,'%s/saas-ec.internal.weimob.com.conf' % CWD_DIR)
+    shutil.copyfile('%s/vhost.d/saas-ec.internal.domain.com.conf' % base_DIR,'%s/saas-ec.internal.domain.com.conf' % CWD_DIR)
     os.chdir(CWD_DIR)
     #Count the line number
-    with open('saas-ec.internal.weimob.com.conf','r') as f:
+    with open('saas-ec.internal.domain.com.conf','r') as f:
         tmpnum = len(f.readlines())
         neednum = int(tmpnum) - 1
 
-    with open('saas-ec.internal.weimob.com.conf','r') as f:
+    with open('saas-ec.internal.domain.com.conf','r') as f:
         try:
             os.remove('tmp.conf')
         except OSError,e:
@@ -136,7 +136,7 @@ def completefile(sourceexcel):
         f.write('}')
 
     #Copy the complete file to source file
-    shutil.copyfile('tmp.conf','%s/vhost.d/saas-ec.internal.weimob.com.conf' % base_DIR)
+    shutil.copyfile('tmp.conf','%s/vhost.d/saas-ec.internal.domain.com.conf' % base_DIR)
 
     #Add the upstreams files
     os.chdir('%s/upstreams' % base_DIR)
@@ -148,7 +148,7 @@ def completefile(sourceexcel):
             check interval=3000 rise=2 fall=5 timeout=1000 type=tcp;
             }
             ''' % (x,allip[0],baseport)
-            with open('upstream_weimob'+x+'.conf','a') as f:
+            with open('upstream_domain'+x+'.conf','a') as f:
                 f.write(newupstreams)
 
 
@@ -161,7 +161,7 @@ def completefile(sourceexcel):
             check interval=3000 rise=2 fall=5 timeout=1000 type=tcp;
             }
             ''' % (x,allip[0],baseport,allip[1],baseport)
-            with open('upstream_weimob'+x+'.conf','a') as f:
+            with open('upstream_domain'+x+'.conf','a') as f:
                 f.write(newupstreams)
 
     if len(allip) == 3:
@@ -174,7 +174,7 @@ def completefile(sourceexcel):
             check interval=3000 rise=2 fall=5 timeout=1000 type=tcp;
             }
             ''' % (x,allip[0],baseport,allip[1],baseport,allip[2],baseport)
-            with open('upstream_weimob'+x+'.conf','a') as f:
+            with open('upstream_domain'+x+'.conf','a') as f:
                 f.write(newupstreams)
 
     if len(allip) == 4:
@@ -188,7 +188,7 @@ def completefile(sourceexcel):
             check interval=3000 rise=2 fall=5 timeout=1000 type=tcp;
             }
             ''' % (x,allip[0],baseport,allip[1],baseport,allip[2],baseport,allip[3],baseport)
-            with open('upstream_weimob'+x+'.conf','a') as f:
+            with open('upstream_domain'+x+'.conf','a') as f:
                 f.write(newupstreams)
 
     if len(allip) == 5:
@@ -203,7 +203,7 @@ def completefile(sourceexcel):
             check interval=3000 rise=2 fall=5 timeout=1000 type=tcp;
             }
             ''' % (x,allip[0],baseport,allip[1],baseport,allip[2],baseport,allip[3],baseport,allip[4],baseport)
-            with open('upstream_weimob'+x+'.conf','a') as f:
+            with open('upstream_domain'+x+'.conf','a') as f:
                 f.write(newupstreams)
 
 
