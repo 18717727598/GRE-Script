@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
+__author__ = 'bruce.jikun@gmail.com'
+
+
 """
 This script was writen by
 https://github.com/DingGuodong/LinuxBashShellScriptForOps/blob/master/functions/net/tcp/port/portStatistics.py
@@ -21,8 +24,9 @@ import time
 
 class PortStatistics(object):
 
-    def __init__(self, ports):
+    def __init__(self, ports, type):
         self.port = ports
+        self.type = type
 
     def totalcon(self):
         print('Now count all connect info: ')
@@ -120,7 +124,10 @@ class PortStatistics(object):
                 if ip['ipaddress'] is not None:
                     table.add_row([ip['counts'], ip['ipaddress'], ip['stat']['established'], ip['stat']['time_wait'],
                                    ip['stat']['others']])
-            print table.get_string(sortby=table.field_names[0], reversesort=True)
+            if self.type == 'ESTABLISHED':
+                print table.get_string(sortby=table.field_names[2], reversesort=True)
+            if self.type == 'TIME_WAIT':
+                print table.get_string(sortby=table.field_names[3], reversesort=True)
         else:
             print statistics['portIsUsed']
             print 'port %s has no connections, please make sure port is listen or in use.' % port
@@ -132,36 +139,38 @@ class PortStatistics(object):
 if __name__ == '__main__':
 
     # Get total connection
-    y = PortStatistics(18)
+    y = PortStatistics(0, type)
     y.totalcon()
 
     time.sleep(3)
 
-    # Get top 3 of ESTABLISHED connection
-    # print('Get top 3 of ESTABLISHED connection')
-    # p = subprocess.Popen(
-    #     "netstat -na | grep ESTABLISHED | awk '{print $4}' | awk -F ':' '{print $2}' | sort | uniq -c | sort -rn | head -n 3 | awk '{print $2}'",
-    #     stdout=subprocess.PIPE, shell=True)
-    # result = p.communicate()[0].split('\n')
-    # for n in result:
-    #     if n:
-    #         # print(n)
-    #         l = PortStatistics(n)
-    #         l.main()
-    # print('\n')
+    # Get top 3 of ESTABLISHED connection,if there has so many ESTABLISHED,but result was not,that may be just
+    # ESTABLISHED every port.
+    print('Get top 3 of ESTABLISHED connection')
+    p = subprocess.Popen(
+        "netstat -na | grep ESTABLISHED | awk '{print $4}' | awk -F ':' '{print $2}' \
+        | sort 2>/dev/null | uniq -c | sort -rn 2>/dev/null | head -n 3 | awk '{print $2}'",
+        stdout=subprocess.PIPE, shell=True)
+    result = p.communicate()[0].split('\n')
+    for n in result:
+        if n:
+            print(n)
+            l = PortStatistics(n, 'ESTABLISHED')
+            l.main()
+    print('\n')
 
 
-    # time.sleep(3)
+    time.sleep(3)
 
     # Get top 3 of TIME_WAIT connection
     print('Get top 3 of TIME_WAIT connection')
     u = subprocess.Popen(
         "netstat -na | grep TIME_WAIT | awk '{print $4}' | awk -F ':' '{print $2}' \
-        | sort | uniq -c | sort -rn | head -n 3 | awk '{print $2}'",
+        | sort 2>/dev/null | uniq -c | sort -rn 2>/dev/null | head -n 3 | awk '{print $2}'",
         stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     tre = u.communicate()[0].split('\n')
     for n in tre:
         if n:
             # print n
-            l = PortStatistics(n)
+            l = PortStatistics(n, 'TIME_WAIT')
             l.main()
