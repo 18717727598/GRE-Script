@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# auther: hui.luo@domain.com
-# date: 2018.02.27
-# desc: backup logs to rsync server && clean log
-
 logs_dir='
 /data/applogs/saas/
 '
