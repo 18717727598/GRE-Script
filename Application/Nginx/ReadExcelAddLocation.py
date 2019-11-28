@@ -71,14 +71,14 @@ def zip_file(sourceDIR):
 
 
 def halfnewfile():
-    shutil.copyfile('%s/vhost.d/saas-ec.internal.domain.com.conf' % base_DIR,'%s/saas-ec.internal.domain.com.conf' % CWD_DIR)
+    shutil.copyfile('%s/vhost.d/jaas-ec.internal.domain.com.conf' % base_DIR,'%s/jaas-ec.internal.domain.com.conf' % CWD_DIR)
     os.chdir(CWD_DIR)
     #Count the line number
-    with open('saas-ec.internal.domain.com.conf','r') as f:
+    with open('jaas-ec.internal.domain.com.conf','r') as f:
         tmpnum = len(f.readlines())
         neednum = int(tmpnum) - 1
 
-    with open('saas-ec.internal.domain.com.conf','r') as f:
+    with open('jaas-ec.internal.domain.com.conf','r') as f:
         try:
             os.remove('tmp.conf')
         except OSError,e:
@@ -136,7 +136,7 @@ def completefile(sourceexcel):
         f.write('}')
 
     #Copy the complete file to source file
-    shutil.copyfile('tmp.conf','%s/vhost.d/saas-ec.internal.domain.com.conf' % base_DIR)
+    shutil.copyfile('tmp.conf','%s/vhost.d/jaas-ec.internal.domain.com.conf' % base_DIR)
 
     #Add the upstreams files
     os.chdir('%s/upstreams' % base_DIR)

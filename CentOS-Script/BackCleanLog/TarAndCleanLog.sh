@@ -3,7 +3,7 @@
 
 
 # This scripts can fix the log, and the log dir like that:
-# [root@sh-saas-uc-tagcoresrv-online-02 service]# tree
+# [root@sh-jaas-uc-tagcoresrv-online-02 service]# tree
 # .
 # ├── service.log
 # ├── service.log.2018-12-17
@@ -18,7 +18,7 @@
 
 
 #Define something
-targetdir="/data/applogs/saas/uc/tag/core/service/"
+targetdir="/data/applogs/jaas/uc/tag/core/service/"
 keepdays="30"
 logname="service.log"
 needtar=`date -d "yesterday" +%Y-%m-%d`

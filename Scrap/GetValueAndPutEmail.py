@@ -111,7 +111,7 @@ class Mail_Action(object):
         self.mail_server.quit()
 
 if __name__ == '__main__':
-    target = "http://10.10.128.178:8888/clusters/jcpt-openruntime/consumers/openruntime-commmon" \
+    target = "http://10.10.128.178:8888/clusters/nightroverreplace-openruntime/consumers/openruntime-commmon" \
              "/topic/openruntime-commmon/type/KF"
     content = GetContent(target)
     result = content.main()

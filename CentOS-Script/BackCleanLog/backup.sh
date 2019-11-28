@@ -1,10 +1,10 @@
 #!/bin/sh
 
 logs_dir='
-/data/applogs/saas/
+/data/applogs/jaas/
 '
-rsync_server="root@ftp.internal.hsmob.com::saas"
-department="jcpt"
+rsync_server="root@ftp.internal.hsmob.com::jaas"
+department="nightroverreplace"
 hostname=`hostname`
 pass_file="/usr/local/script/rsync.pass"
 rsync="/usr/bin/rsync  -zrRtopg --bwlimit=5120 --password-file=$pass_file --remove-source-files "

@@ -6,6 +6,7 @@ __author__ = 'bruce.jikun@gmail.com'
 
 
 """
+Use python2.6.6
 This script was writen by
 https://github.com/DingGuodong/LinuxBashShellScriptForOps/blob/master/functions/net/tcp/port/portStatistics.py
 And i just modify it.

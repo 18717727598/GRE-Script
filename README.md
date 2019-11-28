@@ -9,5 +9,8 @@
 
 如果对大家有帮助那最好不过。
 
+Note:
+1,Before upload the programs,use /Users/pro/Desktop/ShellScripts/LocalUse/ChangeCodeInfo.sh change the info.
 
-2018/06/14 @Weimob ShangHai BaoShan
+
+2018/06/14 @WM ShangHai BaoShan
